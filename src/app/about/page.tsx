@@ -18,8 +18,6 @@ const page = (props: Props) => {
   const [lastScrollValue, setLastScrollValue] = useState(0)
 
   const handleScroll = () => {
-    // const scrollValue = componentRef.current.scrollLeft
-    // console.log(scrollValue)
     const { scrollLeft, scrollWidth, clientWidth } = componentRef.current
     if (scrollLeft === scrollWidth - clientWidth) {
       setLastScrollValue(scrollLeft)
