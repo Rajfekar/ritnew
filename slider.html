@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div>
+      <div class="slider-container">
+        <div class="slider">
+          <img
+            class="w-screen h-screen"
+            src="https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Image 1"
+          />
+          <img
+            class="w-screen h-screen"
+            src="https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Image 2"
+          />
+          <img
+            class="w-screen h-screen"
+            src="https://images.pexels.com/photos/1205651/pexels-photo-1205651.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Image 3"
+          />
+          <img
+            class="w-screen h-screen"
+            src="https://images.pexels.com/photos/1205651/pexels-photo-1205651.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Image 3"
+          />
+          <img
+            class="w-screen h-screen"
+            src="https://images.pexels.com/photos/1205651/pexels-photo-1205651.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Image 3"
+          />
+        </div>
+        <button class="prev-btn">&#10094;</button>
+        <button class="next-btn">&#10095;</button>
+      </div>
+    </div>
+  </body>
+  <script>
+    const slider = document.querySelector(".slider")
+    const prevBtn = document.querySelector(".prev-btn")
+    const nextBtn = document.querySelector(".next-btn")
+    const images = document.querySelectorAll(".slider img")
+
+    let counter = 0
+    const size = images[0].clientWidth
+
+    slider.style.transform = "translateX(" + -size * counter + "px)"
+
+    nextBtn.addEventListener("click", () => {
+      if (counter >= images.length - 1) return
+      slider.style.transition = "transform 0.4s ease-in-out"
+      counter++
+      slider.style.transform = "translateX(" + -size * counter + "px)"
+    })
+
+    prevBtn.addEventListener("click", () => {
+      if (counter <= 0) return
+      slider.style.transition = "transform 0.4s ease-in-out"
+      counter--
+      slider.style.transform = "translateX(" + -size * counter + "px)"
+    })
+
+    slider.addEventListener("transitionend", () => {
+      if (images[counter].id === "lastClone") {
+        slider.style.transition = "none"
+        counter = images.length - 2
+        slider.style.transform = "translateX(" + -size * counter + "px)"
+      }
+      if (images[counter].id === "firstClone") {
+        slider.style.transition = "none"
+        counter = images.length - counter
+        slider.style.transform = "translateX(" + -size * counter + "px)"
+      }
+    })
+  </script>
+</html>
